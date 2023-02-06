@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Registration</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+</head>
+<body>
+
+	<!-- create navigation bar ( header) -->
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#" th:href="@{/}">Registration and
+					Login Module</a>
+			</div>
+		</div>
+	</nav>
+
+<br>
+<br>
+	<!-- Create HTML registration form -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+
+				<!-- success message -->
+				<div th:if="${param.success}">
+					<div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
+				</div>
+
+				<h1>Registration</h1>
+
+				<form th:action="@{/registration}" method="post" th:object="${transmission_roles}">
+					<div class="form-group">
+						<label class="control-label" for="adAccount"> AD Account </label>
+						<input id="adAccount" class="form-control" th:field="*{adAccount}"
+							required autofocus="autofocus" />
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="adUniqueNumber"> AD Unique Number </label> <input
+							id="adUniqueNumber" class="form-control" th:field="*{adUniqueNumber}"
+							required autofocus="autofocus" />
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="adFirstName"> AD First Name </label> <input
+							id="adFirstName" class="form-control" th:field="*{adFirstName}" required
+							autofocus="autofocus" />
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="adSurname"> AD Surname </label> <input
+							id="adSurname" class="form-control" th:field="*{adSurname}" required
+							autofocus="autofocus" />
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="adEmailAddress"> AD Email Address </label> <input
+							id="adEmailAddress" class="form-control" th:field="*{adEmailAddress}" required
+							autofocus="autofocus" />
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="txsisRole"> TxSIS Role </label> <input
+							id="txsisRole" class="form-control" th:field="*{txsisRole}" required
+							autofocus="autofocus" />
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="status"> Status </label> <input
+							id="status" class="form-control" th:field="*{status}" required
+							autofocus="autofocus" />
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="status"> Role </label>
+						<select class="form-control" th:field="*{role}"  id="role">
+							<option value="0">Please select user type</option>
+							<option value="ADMIN" text="ADMIN">ADMIN</option>
+							<option value="USER" text="USER">USER</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="role"> Block </label> <input
+							id="block" class="form-control" th:field="*{block}" required
+							autofocus="autofocus" />
+					</div>
+
+					<div class="form-group">
+						<button type="submit" class="btn btn-success">Register</button>
+						<span>Already registered? <a href="/" th:href="@{/login}">Login
+								here</a></span>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Registration</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+</head>
+<body>
+
+	<!-- create navigation bar ( header) -->
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#" th:href="@{/}">Registration and
+					Login Module</a>
+			</div>
+		</div>
+	</nav>
+
+<br>
+<br>
+	<!-- Create HTML registration form -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<form th:action="@{/block}" th:object="${transmission_roles}" method="put">
+					<table>
+						<tr>
+						<th>AD Account</th>
+						<th>AD Unique Number</th>
+						<th>AD First Name</th>
+						<th>AD Surname</th>
+						<th>AD Email Address</th>
+						<th>TxSIS Role</th>
+						<th>Status</th>
+						<th>Role</th>
+						<th>Block</th>
+						</tr>
+						<tr th:if="${#lists.isEmpty(transmission_roles)}">
+							<td colspan="7">No Records found. Add some...!</td>
+						</tr>
+						<tr th:each="transmission_roles : ${transmissionRolesList}">
+							<td th:text="${transmission_roles.adAccount}"></td>
+							<td th:text="${transmission_roles.adUniqueNumber}"></td>
+							<td th:text="${transmission_roles.adFirstName}"></td>
+							<td th:text="${transmission_roles.adSurname}"></td>
+							<td th:text="${transmission_roles.adEmailAddress}"></td>
+							<td th:text="${transmission_roles.txSisRole}"></td>
+							<td th:text="${transmission_roles.status}"></td>
+							<td th:text="${transmission_roles.role}"></td>
+							<td th:text="${transmission_roles.blocked}"></td>
+							<!--<td><a th:href="'/' + ${transmission_roles.id}">?</a></td>-->
+						</tr>
+					</table>
+					<div class="form-group">
+						<button type="submit" class="btn btn-success">Block / Unblock</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

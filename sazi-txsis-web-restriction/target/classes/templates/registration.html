@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<html lang="en"
+	  xmlns:th="http://thymeleaf.org"
+>
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -35,8 +38,11 @@
 			<div class="col-md-6 col-md-offset-3">
 
 				<!-- success message -->
-				<div th:if="${param.success}">
-					<div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
+				<div class="alert alert-success" role="alert"
+					 th:if="${success}">
+					<span th:text="${success}"></span>
+					<button aria-label="Close" class="close" data-dismiss="alert" type="button">
+						<span aria-hidden="true">&times;</span></button></button>
 				</div>
 
 				<h1>Registration</h1>

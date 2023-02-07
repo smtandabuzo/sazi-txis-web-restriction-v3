@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class WorkSpaceController {
    }
 
     @GetMapping("/block/{id}")
-    public String showBlockForm(Model model,@PathVariable("id") long id) {
+    public String showBlockForm(Model model, @PathVariable("id") long id, RedirectAttributes redirAttrs) {
         TransmissionRoles user = transmissionRoleRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         if(user.getBlocked() == null){
@@ -57,15 +58,18 @@ public class WorkSpaceController {
        switch (user.getBlocked()) {
            case "0":
                user.setBlocked("1");
+               redirAttrs.addFlashAttribute("message","The user has been blocked successfully");
                break;
            case "1":
            default:
                    user.setBlocked("0");
+               redirAttrs.addFlashAttribute("message","The user has been unlocked successfully");
                    break;
        }
 
         transmissionRoleRepository.save(user);
-        return "redirect:/view-users?blocked";
+
+        return "redirect:/view-users";
     }
 
     @GetMapping("view-users")
@@ -78,11 +82,12 @@ public class WorkSpaceController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteUser(@PathVariable("id") long id, Model model) {
+    public String deleteUser(@PathVariable("id") long id, Model model,RedirectAttributes redirAttrs) {
         TransmissionRoles user = transmissionRoleRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         transmissionRoleRepository.delete(user);
-        return "redirect:/view-users?deleted";
+        redirAttrs.addFlashAttribute("message","The user has been deleted successfully");
+        return "redirect:/view-users";
     }
     @GetMapping("update-user/{id}")
     public String updateTransmissionRoles(@PathVariable("id") Long id,
@@ -95,7 +100,9 @@ public class WorkSpaceController {
     }
 
     @PostMapping("update-user-info/{id}")
-    public String changeUserInfo(@PathVariable  Long id, @ModelAttribute("user") TransmissionRoles transmissionRoles)  {
+    public String changeUserInfo(@PathVariable  Long id,
+                                 @ModelAttribute("user") TransmissionRoles transmissionRoles,
+                                 RedirectAttributes redirAttrs)  {
        var data = transmissionRoles;
 
        TransmissionRoles transRoles = transmissionRoleRepository.findById(id).get();
@@ -105,6 +112,7 @@ public class WorkSpaceController {
         transRoles.setTxSisRole(transmissionRoles.getTxSisRole());
         transRoles.setAdSurname(transmissionRoles.getAdSurname());
         transmissionRoleRepository.save(transRoles);
-       return "redirect:/view-users?updated";
+        redirAttrs.addFlashAttribute("success","The user has been unlocked");
+       return "redirect:/view-users";
     }
 }

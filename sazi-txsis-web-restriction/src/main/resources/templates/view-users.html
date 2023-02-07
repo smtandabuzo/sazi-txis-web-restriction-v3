@@ -27,22 +27,8 @@
 </head>
 <body>
 <!-- create navigation bar ( header) -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed"
-                    data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-                    aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span> <span
-                    class="icon-bar"></span> <span class="icon-bar"></span> <span
-                    class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#" th:href="@{/}">Registration and
-                Login Module</a>
-        </div>
-    </div>
-</nav>
 
+<div th:insert="navbar :: navbar">  </div>
 <br />
 <br />
 <br />
@@ -50,16 +36,14 @@
     <div class="row">
         <h1> Registered Users </h1>
     </div>
-    <div th:if="${param.deleted}">
-        <div class="alert alert-info">User successfully deleted !</div>
-    </div>
+
     <div class="alert alert-success" role="alert"
          th:if="${success}">
         <span th:text="${success}"></span>
         <button aria-label="Close" class="close" data-dismiss="alert" type="button">
             <span aria-hidden="true">&times;</span></button></button>
     </div>
-    <div class="alert alert-success" role="alert"
+    <div class="alert alert-success alert-dismissible" role="alert"
          th:if="${message}">
         <span th:text="${message}"></span>
         <button aria-label="Close" class="close" data-dismiss="alert" type="button">

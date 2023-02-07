@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="authenticating-ldap-complete:war">
+    <output-path>$PROJECT_DIR$/sazi-txsis-web-restriction/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>authenticating-ldap-complete</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="authenticating-ldap-complete-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="authenticating-ldap-complete:war exploded" />
+    </root>
+  </artifact>
+</component>

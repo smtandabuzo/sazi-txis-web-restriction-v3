@@ -72,6 +72,11 @@ public class WorkSpaceController {
         return "redirect:/view-users";
     }
 
+    @GetMapping("/logins")
+    public  String login(){
+        return "login";
+    }
+
     @GetMapping("view-users")
     public String viewUsers(Model model){
         List<TransmissionRoles> transmission_roles = transmissionRoleRepository.findAll();

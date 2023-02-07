@@ -45,11 +45,9 @@ public class TransmissionRegistrationController {
 	@PostMapping
 	public String registerUserAccount(@ModelAttribute("transmission_roles") TransmissionRegistrationDto transmissionRegistrationDto, RedirectAttributes redirectAttributes) {
 //		transmissionRolesService.findByAdUniqueNumber(transmissionRegistrationDto.getAdUniqueNumber())
-		try {
-			transmissionRolesService.saveUser(transmissionRegistrationDto);
-		}catch (Exception e) {
 
-		}
+			transmissionRolesService.saveUser(transmissionRegistrationDto);
+
 
 		redirectAttributes.addFlashAttribute("success","Registration successfull on TxSIS Web");
 		return "redirect:/registration";

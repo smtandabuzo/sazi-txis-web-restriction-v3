@@ -19,7 +19,7 @@ public class TransmissionRolesServiceImpl implements TransmissionRolesService{
     }
 
     @Override
-    public TransmissionRoles findByAdUniqueNumber(String adUniqueNumber) {
+    public TransmissionRoles findByAdUniqueNumber(Long adUniqueNumber) {
         System.out.println("Inside by ad unique number");
         TransmissionRoles transmissionRoles = transmissionRoleRepository.findByAdUniqueNumber(adUniqueNumber);
         if(transmissionRoles == null ){
@@ -32,12 +32,12 @@ public class TransmissionRolesServiceImpl implements TransmissionRolesService{
     }
 
     @Override
-    public String saveUser(TransmissionRegistrationDto transmissionRegistrationDto) {
+    public void saveUser(TransmissionRegistrationDto transmissionRegistrationDto) {
 
         TransmissionRoles transmissionRoles = new TransmissionRoles();
 
         transmissionRoles.setAdAccount(transmissionRegistrationDto.getAdAccount());
-        transmissionRoles.setAdUniqueNumber(transmissionRegistrationDto.getAdUniqueNumber());
+//        transmissionRoles.setAdUniqueNumber(Long.valueOf(transmissionRegistrationDto.getAdUniqueNumber()));
         transmissionRoles.setAdFirstName(transmissionRegistrationDto.getAdFirstName());
         transmissionRoles.setAdSurname(transmissionRegistrationDto.getAdSurname());
         transmissionRoles.setAdEmailAddress(transmissionRegistrationDto.getAdEmailAddress());
@@ -48,7 +48,7 @@ public class TransmissionRolesServiceImpl implements TransmissionRolesService{
                 //transmissionRegistrationDto.getTxsisRole(),transmissionRegistrationDto.getStatus(),transmissionRegistrationDto.getRole(),transmissionRegistrationDto.getBlock());
 
        transmissionRoleRepository.save(transmissionRoles);
-        return "success";
+//        return "success";
     }
 
     @Override

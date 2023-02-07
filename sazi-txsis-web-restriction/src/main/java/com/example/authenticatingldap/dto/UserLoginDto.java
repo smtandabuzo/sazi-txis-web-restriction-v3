@@ -1,16 +1,16 @@
 package com.example.authenticatingldap.dto;
 
 public class UserLoginDto {
-    private String adUniqueNumber;
+    private Long adUniqueNumber;
     private String role;
 
     private String blocked;
 
-    public String getAdUniqueNumber() {
+    public Long getAdUniqueNumber() {
         return adUniqueNumber;
     }
 
-    public void setAdUniqueNumber(String adUniqueNumber) {
+    public void setAdUniqueNumber(Long adUniqueNumber) {
         this.adUniqueNumber = adUniqueNumber;
     }
 

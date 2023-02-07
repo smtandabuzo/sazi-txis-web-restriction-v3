@@ -14,7 +14,7 @@ public class LoginDao {
              // Step 2:Create a statement using connection object
              PreparedStatement preparedStatement = connection
                      .prepareStatement("select * from transmission_roles where ad_unique_number = ? ")) {
-            preparedStatement.setString(1, transmissionRoles.getAdUniqueNumber());
+            preparedStatement.setString(1, String.valueOf(transmissionRoles.getAdUniqueNumber()));
            // preparedStatement.setString(2, loginBean.getPassword());
 
             System.out.println(preparedStatement);

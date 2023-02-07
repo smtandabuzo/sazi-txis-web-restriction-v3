@@ -83,22 +83,23 @@ public class WorkSpaceController {
 
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") long id, Model model,RedirectAttributes redirAttrs) {
-        TransmissionRoles user = transmissionRoleRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-        if(user.getRole() != "ADMIN"){
+        TransmissionRoles user = transmissionRoleRepository.findByUniqueNumber(id);
+        if(user.getRole().equals( "USER")){
             transmissionRoleRepository.delete(user);
+            redirAttrs.addFlashAttribute("message","The user has been deleted successfully");
+        }else{
+            redirAttrs.addFlashAttribute("error","Cannot delete Admin");
         }
 
-        redirAttrs.addFlashAttribute("message","The user has been deleted successfully");
         return "redirect:/view-users";
     }
     @GetMapping("update-user/{id}")
     public String updateTransmissionRoles(@PathVariable("id") Long id,
                                           Model model){
-        var user = transmissionRoleRepository.findById(id);
-        if(user.isPresent()){
-            model.addAttribute("user",user.get());
-        }
+        var user = transmissionRoleRepository.findByUniqueNumber(id);
+       // if(user.isPresent()){
+            model.addAttribute("user",user);
+        //}
             return "update-user";
     }
 
@@ -108,14 +109,14 @@ public class WorkSpaceController {
                                  RedirectAttributes redirAttrs)  {
        var data = transmissionRoles;
 
-       TransmissionRoles transRoles = transmissionRoleRepository.findById(id).get();
+       TransmissionRoles transRoles = transmissionRoleRepository.findByUniqueNumber(id);
 
         transRoles.setRole(transmissionRoles.getRole());
         transRoles.setAdFirstName(transmissionRoles.getAdFirstName());
         transRoles.setTxSisRole(transmissionRoles.getTxSisRole());
         transRoles.setAdSurname(transmissionRoles.getAdSurname());
         transmissionRoleRepository.save(transRoles);
-        redirAttrs.addFlashAttribute("success","The user has been unlocked");
+        redirAttrs.addFlashAttribute("success","The user has been updated successful");
        return "redirect:/view-users";
     }
 }

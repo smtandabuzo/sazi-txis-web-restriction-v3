@@ -65,6 +65,12 @@
         <button aria-label="Close" class="close" data-dismiss="alert" type="button">
             <span aria-hidden="true">&times;</span></button></button>
     </div>
+    <div class="alert alert-warning" role="alert"
+         th:if="${error}">
+        <span th:text="${error}"></span>
+        <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+            <span aria-hidden="true">&times;</span></button></button>
+    </div>
     <table class="table table-striped table-bordered table-hover">
         <thead class="table-info">
             <tr>

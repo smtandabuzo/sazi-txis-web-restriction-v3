@@ -13,6 +13,9 @@ public interface TransmissionRoleRepository extends JpaRepository<TransmissionRo
 //    @Query("SELECT p FROM TransmissionRoles p WHERE " +
 //            "p.adAccount = :adUniqueNumber And p.role LIKE CONCAT('%', :role, '%')" )
     @Transactional
-    TransmissionRoles findByAdUniqueNumber(String adUniqueNumber);
+    TransmissionRoles findByAdUniqueNumber(Long adUniqueNumber);
+    @Query("SELECT p FROM TransmissionRoles p WHERE " +
+            "p.id = :id " )
+    TransmissionRoles findByUniqueNumber(Long id);
 
 }

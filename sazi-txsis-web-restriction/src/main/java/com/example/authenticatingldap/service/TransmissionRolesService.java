@@ -11,9 +11,10 @@ import java.util.Optional;
 
 @Service
 public interface TransmissionRolesService {
-    TransmissionRoles findByAdUniqueNumber(String adUniqueNumber);
+    TransmissionRoles findByAdUniqueNumber(Long adUniqueNumber);
 
-    String saveUser(TransmissionRegistrationDto transmissionRegistrationDto);
+
+    void saveUser(TransmissionRegistrationDto transmissionRegistrationDto);
 
     Optional<TransmissionRoles> findByIdNum(Long id);
     @Query("update TransmissionRoles u set u.blocked = ?1")

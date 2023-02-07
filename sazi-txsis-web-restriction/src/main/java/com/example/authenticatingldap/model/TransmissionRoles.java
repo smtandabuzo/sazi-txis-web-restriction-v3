@@ -2,32 +2,39 @@ package com.example.authenticatingldap.model;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
 
+//import javax.persistence.*;
+
 @Entity
 @Table(name = "transmission_roles", uniqueConstraints = @UniqueConstraint(columnNames = "ad_unique_number"))
-@DynamicInsert
-@DynamicUpdate
+//@DynamicInsert
+//@DynamicUpdate
 public class TransmissionRoles {
 
-    @SequenceGenerator(
-            name = "trans_sequence",
-            sequenceName = "trans_sequence",
-            allocationSize = 1
-    )
-    @Id
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "trans_sequence"
-    )
+    @Column(name = "id", columnDefinition = "BIGINT(20) NOT NULL UNIQUE KEY auto_increment")
     private Long id;
 
     @Column(name = "ad_account")
     private String adAccount;
 
+    @Id
+    @GeneratedValue(generator = "sequence-generator")
+    @GenericGenerator(
+            name = "sequence-generator",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @Parameter(name = "sequence_name", value = "user_sequence"),
+                    @Parameter(name = "initial_value", value = "400000"),
+                    @Parameter(name = "increment_size", value = "1")
+            }
+    )
+
     @Column(name = "ad_unique_number")
-    private String adUniqueNumber;
+    private Long adUniqueNumber;
 
     @Column(name = "ad_firstname")
     private String adFirstName;
@@ -52,10 +59,10 @@ public class TransmissionRoles {
     public TransmissionRoles() {
     }
 
-    public TransmissionRoles(String adAccount, String adUniqueNumber, String adFirstName, String adSurname,
+    public TransmissionRoles(String adAccount, Long adUniqueNumber, String adFirstName, String adSurname,
                              String adEmailAddress, String txSisRole, String status, String role, String blocked) {
         this.adAccount = adAccount;
-        this.adUniqueNumber = adUniqueNumber;
+//        this.adUniqueNumber = adUniqueNumber;
         this.adFirstName = adFirstName;
         this.adSurname = adSurname;
         this.adEmailAddress = adEmailAddress;
@@ -79,11 +86,11 @@ public class TransmissionRoles {
         this.adAccount = adAccount;
     }
 
-    public String getAdUniqueNumber() {
+    public Long getAdUniqueNumber() {
         return adUniqueNumber;
     }
 
-    public void setAdUniqueNumber(String adUniqueNumber) {
+    public void setAdUniqueNumber(Long adUniqueNumber) {
         this.adUniqueNumber = adUniqueNumber;
     }
 

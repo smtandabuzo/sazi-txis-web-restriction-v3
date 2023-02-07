@@ -85,7 +85,10 @@ public class WorkSpaceController {
     public String deleteUser(@PathVariable("id") long id, Model model,RedirectAttributes redirAttrs) {
         TransmissionRoles user = transmissionRoleRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-        transmissionRoleRepository.delete(user);
+        if(user.getRole() != "ADMIN"){
+            transmissionRoleRepository.delete(user);
+        }
+
         redirAttrs.addFlashAttribute("message","The user has been deleted successfully");
         return "redirect:/view-users";
     }

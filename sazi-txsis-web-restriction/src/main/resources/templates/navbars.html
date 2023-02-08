@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-<nav th:fragment="navbar" class="navbar navbar-inverse navbar-fixed-top"><!-- create navigation bar ( header) -->
+<nav th:fragment="users" class="navbar navbar-inverse navbar-fixed-top"><!-- create navigation bar ( header) -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <a class="navbar-brand" href="#">TxSIS Web Restriction</a>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -22,10 +22,14 @@
                         class="icon-bar"></span> <span class="icon-bar"></span> <span
                         class="icon-bar"></span>
                 </button>
-                <!--            <a class="navbar-brand" href="#" th:href="@{/admin}">Home</a>-->
-                <a class="navbar-brand" href="#" th:href="@{/registration}">Register new user</a>
-                <a class="navbar-brand" href="#" th:href="@{/registration}">Register new user</a>
-                <a class="navbar-brand" href="#" th:href="@{/registration}">Register new user</a>
+                <a class="navbar-brand" href="#" th:href="@{/}">Registration and
+                    Login Module</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a th:href="@{/logout}">Logout</a></li>
+                </ul>
+            </div>
 
             </div>
         </div>
